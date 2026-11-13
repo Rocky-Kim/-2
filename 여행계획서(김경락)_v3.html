@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="썬크루즈 가즈아!! 2026년 정동진·강릉 가족 여행 계획서">
+  <title>썬크루즈 가즈아!!</title>
+  <style>
+    :root {
+      --cream: #fff8e9;
+      --paper: #fffdf7;
+      --green: #174936;
+      --orange: #e77b35;
+      --orange-light: #fff0df;
+      --blue-dark: #2a7180;
+      --ink: #24352f;
+      --muted: #63716b;
+      --line: #e6dcc8;
+      --night: #071a36;
+      --night-mid: #123d62;
+      --sea: #0c5770;
+      --light: #ffd978;
+      --shadow: 0 12px 30px rgba(36, 73, 55, .1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+
+    a {
+      color: var(--green);
+    }
+
+    button,
+    a.button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 17px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 4px solid #f2a15d;
+      outline-offset: 3px;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    /*
+      밤바다와 썬크루즈호텔을 연상시키는 CSS 일러스트 배경
+    */
+    .hero {
+      position: relative;
+      min-height: 500px;
+      margin-bottom: 28px;
+      padding: 48px clamp(22px, 5vw, 70px);
+      border-radius: 0 0 34px 34px;
+      color: white;
+      background:
+        radial-gradient(circle at 78% 18%, #fff4bd 0 2%, transparent 2.5%),
+        radial-gradient(circle at 13% 19%, #fff8ce 0 1.4%, transparent 1.9%),
+        radial-gradient(circle at 30% 12%, #fff8ce 0 1%, transparent 1.5%),
+        radial-gradient(circle at 61% 28%, #fff8ce 0 1.2%, transparent 1.7%),
+        linear-gradient(180deg, #050d25 0%, #0a2142 42%, #103f60 67%, #082d47 100%);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      top: 55px;
+      right: 15%;
+      border-radius: 50%;
+      background: #fff2b0;
+      box-shadow: 0 0 35px rgba(255, 238, 166, .6);
+      opacity: .9;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      bottom: -75px;
+      height: 190px;
+      border-radius: 50% 50% 0 0;
+      background:
+        repeating-linear-gradient(
+          -8deg,
+          rgba(255,255,255,.2) 0 3px,
+          transparent 3px 28px
+        ),
+        linear-gradient(180deg, #0e6175, #062f4b);
+      transform: rotate(-2deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 660px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 99px;
+      color: #203d55;
+      background: #fff1ba;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      margin: 22px 0 12px;
+      color: white;
+      font-size: clamp(2.1rem, 6vw, 4.4rem);
+      line-height: 1.12;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, .35);
+    }
+
+    .hero p {
+      margin: 10px 0;
+      font-size: 1.1rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .45);
+    }
+
+    /* CSS로 만든 밤바다 위 크루즈선 */
+    .cruise-illustration {
+      position: absolute;
+      z-index: 3;
+      right: 7%;
+      bottom: 52px;
+      width: min(570px, 58vw);
+      height: 210px;
+      filter: drop-shadow(0 14px 14px rgba(0, 0, 0, .35));
+      pointer-events: none;
+    }
+
+    .cruise-hull {
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+      width: 94%;
+      height: 78px;
+      border-radius: 12px 8px 52px 24px;
+      background: linear-gradient(180deg, #f5ead3 0 35%, #bdc6c6 36% 48%, #617b83 49% 100%);
+      clip-path: polygon(5% 0, 100% 0, 88% 100%, 12% 100%, 0 45%);
+    }
+
+    .cruise-window-row {
+      position: absolute;
+      right: 16%;
+      bottom: 62px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .cruise-window {
+      width: 13px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--light);
+      box-shadow: 0 0 10px rgba(255, 218, 120, .85);
+    }
+
+    .cruise-deck {
+      position: absolute;
+      right: 24%;
+      bottom: 96px;
+      width: 54%;
+      height: 42px;
+      border-radius: 7px 12px 0 0;
+      background: #eee1ca;
+      border-top: 7px solid #96aeb0;
+    }
+
+    .cruise-upper {
+      position: absolute;
+      right: 36%;
+      bottom: 138px;
+      width: 35%;
+      height: 40px;
+      border-radius: 8px 8px 0 0;
+      background: #f3e6d0;
+      border-top: 6px solid #91a8aa;
+    }
+
+    .cruise-tower {
+      position: absolute;
+      right: 47%;
+      bottom: 178px;
+      width: 14%;
+      height: 28px;
+      border-radius: 8px 8px 0 0;
+      background: #e9dcc6;
+    }
+
+    .cruise-light {
+      position: absolute;
+      right: 34%;
+      bottom: 156px;
+      width: 26px;
+      height: 5px;
+      border-radius: 99px;
+      background: var(--light);
+      box-shadow: 0 0 15px var(--light);
+    }
+
+    .cruise-label {
+      position: absolute;
+      right: 28%;
+      bottom: 113px;
+      color: #725b32;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    h2,
+    h3 {
+      color: var(--green);
+      line-height: 1.25;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+
+    .section {
+      margin: 26px 0;
+      padding: clamp(20px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title .number {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: white;
+      background: var(--orange);
+      font-weight: 700;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 0;
+    }
+
+    .fact {
+      padding: 15px;
+      border-radius: 14px;
+      background: #f4f8ee;
+    }
+
+    .fact dt {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .fact dd {
+      margin: 3px 0 0;
+      font-weight: 700;
+    }
+
+    .notice {
+      padding: 16px 18px;
+      border-left: 5px solid var(--orange);
+      border-radius: 10px;
+      background: var(--orange-light);
+    }
+
+    .status {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 99px;
+      color: var(--green);
+      background: #e0f0d7;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .status.unverified {
+      color: #7a4b17;
+      background: #ffe7b9;
+    }
+
+    .status.pending {
+      color: #725a1b;
+      background: #fff1bd;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .day {
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      padding: 16px 20px;
+      color: white;
+      background: var(--green);
+    }
+
+    .day-header h3 {
+      margin: 0;
+      color: white;
+    }
+
+    .day-body {
+      padding: 18px;
+    }
+
+    .schedule {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px 18px;
+      margin: 0;
+    }
+
+    .schedule dt {
+      color: var(--blue-dark);
+      font-weight: 700;
+    }
+
+    .schedule dd {
+      margin: 0;
+    }
+
+    .place-list {
+      margin: 8px 0 0 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+      break-inside: avoid;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .buttons,
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .button.primary {
+      color: white;
+      background: var(--green);
+    }
+
+    .button.secondary {
+      color: var(--green);
+      background: #e4f1ec;
+    }
+
+    .button.orange {
+      color: white;
+      background: var(--orange);
+    }
+
+    .packing-group {
+      margin-bottom: 24px;
+    }
+
+    .packing-group h3 {
+      margin-bottom: 10px;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 55px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .check-item input {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--green);
+      flex: 0 0 auto;
+    }
+
+    .check-item.done span {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .progress-box {
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 15px;
+      background: #edf5e8;
+    }
+
+    .progress-line {
+      height: 14px;
+      margin-top: 10px;
+      border-radius: 99px;
+      background: #d7e2d0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--orange);
+      transition: width .2s ease;
+    }
+
+    .save-message {
+      min-height: 1.6em;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .footer {
+      margin: 30px 0;
+      padding: 22px;
+      border-radius: 18px;
+      color: white;
+      background: var(--green);
+    }
+
+    /* 일정 동선 CSS 개략도 */
+    .map-board {
+      position: relative;
+      min-height: 390px;
+      padding: 25px;
+      border: 2px solid #b7d8d5;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #e5f5ed, #c8e9e7);
+    }
+
+    .map-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        155deg,
+        transparent 0 44px,
+        rgba(255,255,255,.45) 45px 48px
+      );
+      opacity: .7;
+    }
+
+    .map-road {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 48%;
+      height: 12px;
+      border-radius: 99px;
+      background: #f7c67b;
+      transform: rotate(-12deg);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.55);
+    }
+
+    .map-route {
+      position: absolute;
+      left: 13%;
+      right: 13%;
+      top: 48%;
+      height: 4px;
+      border-top: 4px dashed var(--green);
+      transform: rotate(-12deg);
+    }
+
+    .map-marker {
+      position: absolute;
+      z-index: 2;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .map-pin {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 3px solid white;
+      border-radius: 50% 50% 50% 0;
+      color: white;
+      background: var(--orange);
+      font-weight: 700;
+      transform: rotate(-45deg);
+      box-shadow: 0 3px 8px #56807a;
+    }
+
+    .map-pin span {
+      transform: rotate(45deg);
+    }
+
+    .map-label {
+      display: block;
+      width: 140px;
+      margin-top: 8px;
+      padding: 5px;
+      border-radius: 8px;
+      color: var(--green);
+      background: rgba(255,255,255,.92);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .m1 { left: 12%; top: 72%; }
+    .m2 { left: 30%; top: 55%; }
+    .m3 { left: 48%; top: 40%; }
+    .m4 { left: 66%; top: 28%; }
+    .m5 { left: 84%; top: 18%; }
+
+    .map-legend {
+      position: relative;
+      z-index: 3;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.8);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 650px) {
+      .cruise-illustration {
+        right: -8%;
+        bottom: 45px;
+        width: 510px;
+        transform: scale(.78);
+        transform-origin: right bottom;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 18px, 1120px);
+      }
+
+      .hero {
+        min-height: 500px;
+        padding: 30px 20px;
+        border-radius: 0 0 24px 24px;
+      }
+
+      .hero h1 {
+        font-size: 2.65rem;
+      }
+
+      .section {
+        padding: 20px 15px;
+        border-radius: 17px;
+      }
+
+      .schedule {
+        grid-template-columns: 72px 1fr;
+        gap: 8px 10px;
+      }
+
+      .controls .button,
+      .buttons .button {
+        width: 100%;
+      }
+
+      .map-board {
+        min-height: 470px;
+      }
+
+      .map-road,
+      .map-route {
+        left: 10%;
+        right: 10%;
+        top: 53%;
+        transform: rotate(-72deg);
+      }
+
+      .m1 { left: 20%; top: 85%; }
+      .m2 { left: 30%; top: 68%; }
+      .m3 { left: 50%; top: 51%; }
+      .m4 { left: 70%; top: 33%; }
+      .m5 { left: 80%; top: 15%; }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      body {
+        color: #111;
+        background: white;
+        font-size: 12pt;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: 180px;
+        color: #111;
+        background: #e9f4f2;
+        box-shadow: none;
+      }
+
+      .hero::before,
+      .hero::after,
+      .cruise-illustration {
+        display: none;
+      }
+
+      .hero h1,
+      .hero p {
+        color: #111;
+        text-shadow: none;
+      }
+
+      .section {
+        border: 1px solid #bbb;
+        box-shadow: none;
+      }
+
+      .no-print,
+      .controls,
+      .map-link {
+        display: none !important;
+      }
+
+      .check-item input {
+        display: none;
+      }
+
+      .check-item.done span::after {
+        content: " (준비 완료)";
+        color: #17633e;
+        text-decoration: none;
+      }
+
+      .check-item:not(.done) span::after {
+        content: " (미준비)";
+        color: #9b3d23;
+        text-decoration: none;
+      }
+
+      .card,
+      .day,
+      .map-board {
+        break-inside: avoid;
+      }
+
+      .map-board {
+        min-height: 300px;
+      }
+
+      .footer {
+        color: #111;
+        background: white;
+        border: 1px solid #aaa;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="cruise-illustration" aria-hidden="true">
+      <div class="cruise-tower"></div>
+      <div class="cruise-upper"></div>
+      <div class="cruise-deck"></div>
+      <div class="cruise-light"></div>
+      <div class="cruise-label">SUN CRUISE</div>
+      <div class="cruise-window-row">
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+        <i class="cruise-window"></i>
+      </div>
+      <div class="cruise-hull"></div>
+    </div>
+
+    <div class="page hero-content">
+      <span class="eyebrow">2026 겨울 가족 여행</span>
+      <h1>썬크루즈<br>가즈아!!</h1>
+      <p>밤바다와 호텔 불빛이 기다리는 정동진 가족 여행입니다.</p>
+      <p><strong>2026년 12월 19일(토) ~ 12월 21일(월) · 2박 3일</strong></p>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <div class="section-title">
+        <span class="number">1</span>
+        <h2>여행 한눈에 보기</h2>
+      </div>
+
+      <dl class="facts">
+        <div class="fact"><dt>숙소</dt><dd>정동진 썬크루즈호텔</dd></div>
+        <div class="fact"><dt>출발</dt><dd>충주 · 자가용</dd></div>
+        <div class="fact"><dt>가족</dt><dd>성인 2명 · 초등 6학년 1명 · 6살 1명</dd></div>
+        <div class="fact"><dt>예산</dt><dd>숙박 제외 30만~60만 원</dd></div>
+        <div class="fact"><dt>입실·퇴실</dt><dd>19일 15:00 · 21일 11:00</dd></div>
+        <div class="fact"><dt>여행 속도</dt><dd>하루 2~3곳</dd></div>
+      </dl>
+
+      <p class="notice">
+        이 페이지는 가족이 공유할 수 있는 공개 웹페이지입니다.
+        실명·상세 주소·전화번호·예약번호는 포함하지 않았습니다.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">2</span>
+        <h2>날짜별 일정</h2>
+      </div>
+
+      <p class="meta">
+        표시된 시간은 계획 시간이며, 영업시간이나 예약 확정 시간이 아닙니다.
+        실제 이동시간과 도로 상황은 방문 전에 확인해 주세요.
+      </p>
+
+      <div class="timeline">
+        <article class="day">
+          <div class="day-header">
+            <h3>12월 19일 · 정동진 도착과 겨울 바다</h3>
+          </div>
+
+          <div class="day-body">
+            <dl class="schedule">
+              <dt>오전~오후</dt>
+              <dd>
+                충주 출발 예정: 오전 11시~오후 1시<br>
+                실제 이동시간과 도로 상황은 미확인입니다.
+              </dd>
+
+              <dt>오후</dt>
+              <dd>15:00 정동진 썬크루즈호텔 입실 후 휴식</dd>
+
+              <dt>입실 후</dt>
+              <dd>
+                정동진 해변과 모래시계공원 방문
+                <ul class="place-list">
+                  <li>겨울 날씨와 아이들 컨디션에 따라 체류시간 조정</li>
+                  <li>입실 전 관광은 진행하지 않음</li>
+                </ul>
+              </dd>
+
+              <dt>저녁</dt>
+              <dd>
+                고기랑조개랑
+                <span class="status unverified">사용자 제공·미검증</span>
+              </dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-header">
+            <h3>12월 20일 · 안목과 강릉의 하루</h3>
+          </div>
+
+          <div class="day-body">
+            <dl class="schedule">
+              <dt>오전</dt>
+              <dd>안목해변 산책</dd>
+
+              <dt>오전~점심</dt>
+              <dd>보사노바 커피로스터즈 강릉점에서 휴식</dd>
+
+              <dt>점심</dt>
+              <dd>강릉 중앙시장 음식 · 구체적인 메뉴와 점포는 미정</dd>
+
+              <dt>오후</dt>
+              <dd>아르떼뮤지엄 관람 · 계획 관람 시간 1시간 30분</dd>
+
+              <dt>저녁</dt>
+              <dd>
+                어부횟집
+                <span class="status unverified">사용자 제공·미검증</span>
+              </dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-header">
+            <h3>12월 21일 · 일출을 시도하는 아침</h3>
+          </div>
+
+          <div class="day-body">
+            <dl class="schedule">
+              <dt>오전</dt>
+              <dd>
+                아이들 컨디션에 따라 일출 시도
+                <span class="status pending">선택 일정</span>
+              </dd>
+
+              <dt>이후</dt>
+              <dd>숙소에서 휴식</dd>
+
+              <dt>11:00</dt>
+              <dd>퇴실 후 충주로 귀가</dd>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">3</span>
+        <h2>여행 동선 개략도</h2>
+      </div>
+
+      <p class="notice">
+        이 지도는 실제 지도 API가 아닌 CSS로 만든 일정 확인용 개략도입니다.
+        장소의 실제 위치·축척·거리·이동시간·도로 경로를 보장하지 않습니다.
+        정확한 위치는 각 장소의 네이버 지도 버튼에서 확인해 주세요.
+      </p>
+
+      <div class="map-board" aria-label="정동진과 강릉 여행 동선 개략도">
+        <div class="map-road"></div>
+        <div class="map-route"></div>
+
+        <div class="map-marker m1">
+          <div class="map-pin"><span>1</span></div>
+          <span class="map-label">썬크루즈호텔</span>
+        </div>
+
+        <div class="map-marker m2">
+          <div class="map-pin"><span>2</span></div>
+          <span class="map-label">정동진 해변·공원</span>
+        </div>
+
+        <div class="map-marker m3">
+          <div class="map-pin"><span>3</span></div>
+          <span class="map-label">안목해변·카페</span>
+        </div>
+
+        <div class="map-marker m4">
+          <div class="map-pin"><span>4</span></div>
+          <span class="map-label">중앙시장·아르떼뮤지엄</span>
+        </div>
+
+        <div class="map-marker m5">
+          <div class="map-pin"><span>5</span></div>
+          <span class="map-label">어부횟집</span>
+        </div>
+
+        <div class="map-legend">
+          일정 흐름:
+          ① 숙소 →
+          ② 정동진 해변·모래시계공원 →
+          ③ 안목해변·보사노바 →
+          ④ 중앙시장·아르떼뮤지엄 →
+          ⑤ 어부횟집
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">4</span>
+        <h2>선택한 식당·카페</h2>
+      </div>
+
+      <p class="notice">
+        아래 장소는 사용자가 제공한 정보입니다.
+        실제 영업 여부와 세부 정보는 방문 전에 확인해 주세요.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>고기랑조개랑</h3>
+          <span class="status unverified">사용자 제공·미검증</span>
+          <p><strong>12월 19일 저녁</strong></p>
+          <p>고기·조개류 식사 장소입니다.</p>
+          <p class="meta">
+            가격·영업시간·휴무·주차·예약·어린이 동반 여부: 방문 전 확인
+          </p>
+
+          <a
+            class="button secondary map-link"
+            href="https://map.naver.com/p/search/%EA%B3%A0%EA%B8%B0%EB%9E%91%EC%A1%B0%EA%B0%9C%EB%9E%91"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            고기랑조개랑 네이버 지도
+          </a>
+        </article>
+
+        <article class="card">
+          <h3>보사노바 커피로스터즈 강릉점</h3>
+          <span class="status unverified">사용자 제공·미검증</span>
+          <p><strong>12월 20일 안목해변 산책 후</strong></p>
+          <p>바다 산책과 카페 휴식을 함께 하는 일정입니다.</p>
+          <p class="meta">
+            강릉점 운영시간·휴무·주차·좌석·메뉴·가격: 방문 전 확인
+          </p>
+
+          <a
+            class="button secondary map-link"
+            href="https://map.naver.com/p/search/%EB%B3%B4%EC%82%AC%EB%85%B8%EB%B0%94%20%EC%BB%A4%ED%94%BC%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%A6%88%20%EA%B0%95%EB%A6%89%EC%A0%90"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            보사노바 네이버 지도
+          </a>
+        </article>
+
+        <article class="card">
+          <h3>어부횟집</h3>
+          <span class="status unverified">사용자 제공·미검증</span>
+          <p><strong>12월 20일 저녁</strong></p>
+          <p>해산물 식사 장소입니다.</p>
+          <p class="meta">
+            정확한 지점·영업시간·휴무·가격·주차·예약·어린이 동반 여부:
+            방문 전 확인
+          </p>
+
+          <a
+            class="button secondary map-link"
+            href="https://map.naver.com/p/search/%EC%96%B4%EB%B6%80%ED%9A%8C%EC%A7%91"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            어부횟집 네이버 지도
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">5</span>
+        <h2>주요 장소 네이버 지도</h2>
+      </div>
+
+      <p class="meta">
+        아래 버튼은 페이지 안에 지도를 삽입하지 않고 네이버 지도 검색 화면을
+        새 탭으로 엽니다. 정확한 지점은 직접 확인해 주세요.
+      </p>
+
+      <div class="buttons">
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EC%A0%95%EB%8F%99%EC%A7%84%20%EC%8D%AC%ED%81%AC%EB%A3%A8%EC%A6%88%ED%98%B8%ED%85%94" target="_blank" rel="noopener noreferrer">썬크루즈호텔 지도</a>
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EC%A0%95%EB%8F%99%EC%A7%84%20%ED%95%B4%EB%B3%80" target="_blank" rel="noopener noreferrer">정동진 해변 지도</a>
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EB%AA%A8%EB%9E%98%EC%8B%9C%EA%B3%84%EA%B3%B5%EC%9B%90%20%EA%B0%95%EB%A6%89" target="_blank" rel="noopener noreferrer">모래시계공원 지도</a>
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EC%95%88%EB%AA%A9%ED%95%B4%EB%B3%80" target="_blank" rel="noopener noreferrer">안목해변 지도</a>
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EA%B0%95%EB%A6%89%20%EC%A4%91%EC%95%99%EC%8B%9C%EC%9E%A5" target="_blank" rel="noopener noreferrer">강릉 중앙시장 지도</a>
+        <a class="button secondary map-link" href="https://map.naver.com/p/search/%EC%95%84%EB%A5%B4%EB%96%BC%EB%AE%A4%EC%A7%80%EC%97%84%20%EA%B0%95%EB%A6%89" target="_blank" rel="noopener noreferrer">아르떼뮤지엄 지도</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">6</span>
+        <h2>우천·강설 대안</h2>
+      </div>
+
+      <ul>
+        <li>안목해변 산책 시간을 줄이거나 생략합니다.</li>
+        <li>보사노바 커피로스터즈 강릉점에서 휴식 시간을 늘립니다.</li>
+        <li>아르떼뮤지엄 중심으로 진행합니다.</li>
+        <li>식당은 유지하되 운영 여부를 방문 전에 확인합니다.</li>
+        <li>실제 날씨와 기상예보를 확인한 내용은 아닙니다.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="number">7</span>
+        <h2>준비물 체크리스트</h2>
+      </div>
+
+      <div class="progress-box">
+        <strong id="progressText">준비 완료 0/12 · 0%</strong>
+        <div class="progress-line">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div id="saveMessage" class="save-message" role="status"></div>
+      </div>
+
+      <div class="packing-group">
+        <h3>개인 준비물</h3>
+        <div class="checklist">
+          <label class="check-item"><input type="checkbox" data-id="p01"><span>겨울 외투</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p02"><span>모자</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p03"><span>장갑</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p04"><span>목도리</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p05"><span>따뜻한 양말</span></label>
+        </div>
+      </div>
+
+      <div class="packing-group">
+        <h3>공통 준비물</h3>
+        <div class="checklist">
+          <label class="check-item"><input type="checkbox" data-id="p06"><span>아이 간식</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p07"><span>물</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p08"><span>보조 배터리</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p09"><span>물티슈</span></label>
+        </div>
+      </div>
+
+      <div class="packing-group">
+        <h3>활동·차량용 준비물</h3>
+        <div class="checklist">
+          <label class="check-item"><input type="checkbox" data-id="p10"><span>미끄럼 방지 신발</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p11"><span>작은 가방</span></label>
+          <label class="check-item"><input type="checkbox" data-id="p12"><span>차량용 담요</span></label>
+        </div>
+      </div>
+
+      <div class="controls no-print">
+        <button class="button orange" id="resetButton" type="button">
+          체크 상태 초기화
+        </button>
+      </div>
+    </section>
+
+    <section class="section no-print">
+      <div class="section-title">
+        <span class="number">8</span>
+        <h2>인쇄·PDF 저장</h2>
+      </div>
+
+      <p>
+        전체 계획서를 인쇄하거나 PDF로 저장할 수 있습니다.
+        버튼을 누른 뒤 Chrome 인쇄 창에서 대상을
+        <strong>PDF로 저장</strong>으로 선택해 주세요.
+      </p>
+
+      <div class="controls">
+        <button class="button primary" id="printButton" type="button">
+          인쇄 / PDF로 저장
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>저장 안내</strong>
+      <p>
+        준비물 체크 상태는 현재 기기·브라우저의 localStorage에 저장됩니다.
+        다른 가족과 자동 동기화되지 않습니다.
+        PDF는 체크 상태 복원용 파일이 아닌 읽는 기록입니다.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const STORAGE_KEY = "family-trip-2026-jeongdongjin-checklist";
+      const checkboxes = Array.from(
+        document.querySelectorAll("input[data-id]")
+      );
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+      const saveMessage = document.getElementById("saveMessage");
+
+      function showMessage(message, isError) {
+        saveMessage.textContent = message;
+        saveMessage.style.color = isError ? "#a33e25" : "";
+      }
+
+      function updateProgress() {
+        const total = checkboxes.length;
+        const completed = checkboxes.filter(function (box) {
+          return box.checked;
+        }).length;
+
+        const percent = total === 0
+          ? 0
+          : Math.round((completed / total) * 100);
+
+        progressText.textContent =
+          "준비 완료 " + completed + "/" + total + " · " + percent + "%";
+
+        progressBar.style.width = percent + "%";
+
+        checkboxes.forEach(function (box) {
+          box.closest(".check-item").classList.toggle(
+            "done",
+            box.checked
+          );
+        });
+      }
+
+      function saveState() {
+        const state = {};
+
+        checkboxes.forEach(function (box) {
+          state[box.dataset.id] = box.checked;
+        });
+
+        try {
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(state)
+          );
+          showMessage("이 브라우저에 체크 상태를 저장했습니다.");
+        } catch (error) {
+          showMessage(
+            "저장할 수 없는 환경입니다. 체크와 인쇄는 계속 사용할 수 있습니다.",
+            true
+          );
+        }
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          const state = raw ? JSON.parse(raw) : {};
+
+          if (
+            !state ||
+            typeof state !== "object" ||
+            Array.isArray(state)
+          ) {
+            throw new Error("잘못된 저장 형식");
+          }
+
+          checkboxes.forEach(function (box) {
+            box.checked = state[box.dataset.id] === true;
+          });
+        } catch (error) {
+          showMessage(
+            "저장된 체크 상태를 읽지 못했습니다. 현재 체크와 인쇄는 사용할 수 있습니다.",
+            true
+          );
+        }
+
+        updateProgress();
+      }
+
+      checkboxes.forEach(function (box) {
+        box.addEventListener("change", function () {
+          updateProgress();
+          saveState();
+        });
+      });
+
+      document
+        .getElementById("resetButton")
+        .addEventListener("click", function () {
+          const confirmed = window.confirm(
+            "이 여행의 준비물 체크 상태를 모두 초기화할까요?"
+          );
+
+          if (!confirmed) {
+            return;
+          }
+
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (error) {
+            // 저장소 삭제가 차단되어도 화면 초기화는 계속합니다.
+          }
+
+          checkboxes.forEach(function (box) {
+            box.checked = false;
+          });
+
+          updateProgress();
+          showMessage("이 여행의 체크 상태를 초기화했습니다.");
+        });
+
+      document
+        .getElementById("printButton")
+        .addEventListener("click", function () {
+          window.print();
+        });
+
+      loadState();
+    }());
+  </script>
+</body>
+</html>
